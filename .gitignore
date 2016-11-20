@@ -1,0 +1,8 @@
+# ignore files
+
+*.elc
+
+# but these files
+# !*.el
+
+
