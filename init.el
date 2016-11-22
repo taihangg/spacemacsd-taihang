@@ -141,6 +141,14 @@ values."
                          solarized-dark
                          leuven
                          zenburn
+						 afternoon
+                         alect-dark
+                         farmhouse-dark 
+                         adwaita
+                         alect-black
+                         deeper-blue
+                         sanityinc-solarized-light 
+                         sanityinc-solarized-dark
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -263,7 +271,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -341,6 +349,7 @@ you should place your code here."
   (define-key evil-insert-state-map [escape] 'evil-normal-state)
   (setq ns-use-srgb-colorspace nil)
   (setq powerline-default-separator 'arrow)
+    ;;(global-linum-mode t)
   
   )
 
