@@ -30,7 +30,9 @@
 ;;; Code:
 
 (defconst taihangg-packages
-  '()
+  '(
+    youdao-dictionary
+    )
   "The list of Lisp packages required by the taihangg layer.
 
 Each entry is either:
@@ -60,3 +62,6 @@ Each entry is either:
 
 
 ;;; packages.el ends here
+(defun taihangg/init-youdao-dictionary()
+  (use-package youdao-dictionary)
+  )

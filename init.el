@@ -350,6 +350,9 @@ you should place your code here."
   (setq ns-use-srgb-colorspace nil)
   (setq powerline-default-separator 'arrow)
     ;;(global-linum-mode t)
+  (setq-default cursor-type 'hbar) 
+  (set-face-background hl-line-face "#127")  
+  ;;(set-face-foreground hl-line-face "#ffff00")
   
   )
 
