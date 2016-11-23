@@ -351,7 +351,7 @@ you should place your code here."
   (setq powerline-default-separator 'arrow)
     ;;(global-linum-mode t)
   (setq-default cursor-type 'hbar) 
-  (set-face-background hl-line-face "#127")  
+  (set-face-background hl-line-face "#668B8B")  
   ;;(set-face-foreground hl-line-face "#ffff00")
   
   )
