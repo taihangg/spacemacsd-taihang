@@ -1,2 +1,3 @@
-SPC s j     counsel-imenu
+SPC s j             counsel-imenu
 SPC h SPC
+SPC a d/SPC f j     dired

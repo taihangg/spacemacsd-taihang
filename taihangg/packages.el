@@ -63,5 +63,10 @@ Each entry is either:
 
 ;;; packages.el ends here
 (defun taihangg/init-youdao-dictionary()
-  (use-package youdao-dictionary)
+  (use-package youdao-dictionary
+    :defer t
+    :init
+    (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
+    )
   )
+
