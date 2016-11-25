@@ -29,3 +29,19 @@
 ;;(evilified-state-evilify-map occur-mode-map
 ;;  :mode occur-mode)
 
+;;(require 'color-theme-solarized)
+;;(color-theme-solarized)
+
+
+(defun my-byte-compile-and-recompile-directory (directory)
+       (interactive "DByte compile and recompile directory: \n")
+       (byte-recompile-directory directory 0)
+       )
+
+;;(my-byte-compile-and-recompile-directory "~/.emacs.d")
+
+(defun my-byte-compile-and-recompile-directory-force (directory)
+       (interactive "DByte compile and recompile directory: \n")
+       (byte-recompile-directory directory 0 t)
+       )
+

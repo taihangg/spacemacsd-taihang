@@ -60,6 +60,7 @@ values."
    dotspacemacs-additional-packages
    '(
      ;;youdao
+     color-theme
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -110,7 +111,7 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -143,13 +144,13 @@ values."
                          solarized-dark
                          leuven
                          zenburn
-						 afternoon
+                         afternoon
                          alect-dark
-                         farmhouse-dark 
+                         farmhouse-dark
                          adwaita
                          alect-black
                          deeper-blue
-                         sanityinc-solarized-light 
+                         sanityinc-solarized-light
                          sanityinc-solarized-dark
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -353,9 +354,24 @@ you should place your code here."
   (setq powerline-default-separator 'arrow)
     ;;(global-linum-mode t)
   (setq-default cursor-type 'hbar) 
-  (set-face-background hl-line-face "#668B8B")  
+  ;;(set-face-background hl-line-face "#668B8B")  
   ;;(set-face-foreground hl-line-face "#ffff00")
-  
+
+  ;; Make evil-mode up/down operate in screen lines instead of logical lines
+  (define-key evil-motion-state-map "j" 'evil-next-visual-line)
+  (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
+  ;; Also in visual mode
+  (define-key evil-visual-state-map "j" 'evil-next-visual-line)
+  (define-key evil-visual-state-map "k" 'evil-previous-visual-line) e fed
+
+  ;;add-hook 'after-make-frame-functions
+  ;;         (lambda (frame)
+  ;;           (let ((mode (if (display-graphic-p frame) 'light 'dark)))
+  ;;             (set-frame-parameter frame 'background-mode mode)
+  ;;             (set-terminal-parameter frame 'background-mode mode))
+  ;;           (enable-theme 'solarized))) 
+
+
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
