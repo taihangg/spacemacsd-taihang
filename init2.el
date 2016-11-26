@@ -20,7 +20,7 @@ values."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation 'unused
+   dotspacemacs-enable-lazy-installation 'nil
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
    dotspacemacs-ask-for-lazy-installation t
@@ -31,45 +31,70 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     ivy
-     helm
-     auto-completion
-     (better-defaults
-      :variables better-defaults-move-to-end-of-code-first t)
-     emacs-lisp
-     git
-     markdown
-     org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     spell-checking
-     syntax-checking
-     ;; version-control
-     (chinese :variables chinese-enable-youdao-dict t)
-     taihangg 
+        ;; ----------------------------------------------------------------
+        ;; Example of useful layers you may want to use right away.
+        ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+        ;; <M-m f e R> (Emacs style) to install them.
+        ;; ----------------------------------------------------------------
+        
+        ;; completion layer
+        helm
+	(auto-completion :variables auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-snippets-in-popup t
+                      :disabled-for org markdown)
+        
+        better-defaults
+        
+        ;; git
+        
+        ;; markdown
+        
+        
+
+        
+        ;; spell-checking
+        syntax-checking
+
+        ;; version-control
+        
+        ;; theme layer
+        colors
+        
+        
+        ranger
+     	search-engine
+     	(gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
+     	(shell :variables shell-default-shell 'eshell)
+     	(org :variables 
+            org-enable-reveal-js-support t
+            org-projectile-file "~/TODOs.org")
+        html
+     	javascript
+        ;; programming layer
+	emacs-lisp
+        (c-c++ :variables
+                c-c++-default-mode-for-headers 'c++-mode)
+        go
+        
+        (chinese    :packages youdao-dictionary fcitx
+                    :variables chinese-enable-fcitx nil
+                    chinese-enable-youdao-dict t)
+        
+        chrome
+        
+        ;; email layer
+        mu4e
+    
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages
-   '(
-     ;;youdao
-     color-theme
-     )
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(
-                                    flyspell
-                                    evil-unimpaired
-                                    )
+   dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -87,6 +112,9 @@ You should not put any user code in there besides modifying the variable
 values."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
+  
+  
+  
   (setq-default
    ;; If non nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
@@ -94,9 +122,9 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 10
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -112,7 +140,7 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'hybrid
+   dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -137,29 +165,22 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(
-                         monokai
-                         spacemacs-dark
-                         spacemacs-light
-                         solarized-light
-                         solarized-dark
-                         leuven
-                         zenburn
-                         afternoon
-                         alect-dark
-                         farmhouse-dark
-                         adwaita
-                         alect-black
-                         deeper-blue
-                         sanityinc-solarized-light
-                         sanityinc-solarized-dark
-                         )
+   dotspacemacs-themes '(   
+                            ;; monokai
+                            afternoon
+                            alect-dark
+                            farmhouse-dark 
+                            adwaita
+                            alect-black
+                            deeper-blue
+                            sanityinc-solarized-light 
+                            sanityinc-solarized-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -253,7 +274,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -307,7 +328,12 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
-   ))
+   cursor-type 'hollow
+   )
+   
+   
+   
+   )
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -316,29 +342,20 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+    
+    
     (setq configuration-layer--elpa-archives
         '(
-            ;;("melpa-cn"     .   "http://elpa.zilongshanren.com/melpa/")
-            ;;("org-cn"       .   "http://elpa.zilongshanren.com/org/")
-            ;;("gnu-cn"       .   "http://elpa.zilongshanren.com/gnu/")
-            
-            ("melpa"        .   "http://elpa.zilongshanren.com/melpa/")
-            ("gnu"          .   "http://elpa.zilongshanren.com/gnu/")
-            ("melpa-stable" .   "http://elpa.zilongshanren.com/melpa-stable/")
-            ("marmalade"    .   "http://elpa.zilongshanren.com/marmalade/")
-            ("org"          .   "http://elpa.zilongshanren.com/org/")
-            ;;("melpa"        .   "https://melpa.org/packages/")
-            ;;("popkit"       .   "http://elpa.popkit.org/packages/")
-        )
-    )
-    (setq tramp-ssh-controlmaster-options
-          "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+            ("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+            ("org-cn"   . "http://elpa.zilongshanren.com/org/")
+            ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")
 
-    (setq package-user-dir (concat dotspacemacs-directory "elpa"))
+          ))
+          
+          
+    ;; https://github.com/syl20bnr/spacemacs/issues/2705
+    (setq tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
     
-    
-    
-
   )
 
 (defun dotspacemacs/user-config ()
@@ -348,62 +365,67 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-
-  (setcdr evil-insert-state-map nil)
-  (define-key evil-insert-state-map [escape] 'evil-normal-state)
-  (setq ns-use-srgb-colorspace nil)
-  (setq powerline-default-separator 'arrow)
-    ;;(global-linum-mode t)
-  (setq-default cursor-type 'hbar) 
-  ;;(set-face-background hl-line-face "#668B8B")  
-  ;;(set-face-foreground hl-line-face "#ffff00")
-
-  ;; Make evil-mode up/down operate in screen lines instead of logical lines
-  (define-key evil-motion-state-map "j" 'evil-next-visual-line)
-  (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
-  ;; Also in visual mode
-  (define-key evil-visual-state-map "j" 'evil-next-visual-line)
-  (define-key evil-visual-state-map "k" 'evil-previous-visual-line) e fed
-
-  ;;(setq default-fill-column 60)
-  ;; 设置 sentence-end 可以识别中文标点。不用在 fill 时在句号后插 入两个空格。
-  (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
-  (setq sentence-end-double-space nil)
-  
-  ;; 可以递归的使用 minibuffer。
-  ;;(setq enable-recursive-minibuffers t)
-
-  ;; 防止页面滚动时跳动， scroll-margin 3 可以在靠近屏幕边沿3行时就开始滚动，可以很好的看到上下文。
-  (setq scroll-margin 3
-        scroll-conservatively 10000)
-
-  ;; 把缺省的 major mode 设置为 text-mode, 而不是几乎什么功能也 没有的 fundamental-mode.
-  (setq default-major-mode 'text-mode)
-
-  ;; 光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线。
-  (mouse-avoidance-mode 'animate)
-
-  ;; 把这些缺省禁用的功能打开。
-  (put 'set-goal-column 'disabled nil)
-  (put 'narrow-to-region 'disabled nil)
-  (put 'upcase-region 'disabled nil)
-  (put 'downcase-region 'disabled nil)
-  (put 'LaTeX-hide-environment 'disabled nil)
-
-  
-
-
-
-
-  ;;add-hook 'after-make-frame-functions
-  ;;         (lambda (frame)
-  ;;           (let ((mode (if (display-graphic-p frame) 'light 'dark)))
-  ;;             (set-frame-parameter frame 'background-mode mode)
-  ;;             (set-terminal-parameter frame 'background-mode mode))
-  ;;           (enable-theme 'solarized))) 
-
-
+    ;(setq ns-use-srgb-colorspace nil)
+    ;(setq powerline-default-separator 'utf-8)
+    ;(add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
+    ;(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+    ;(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
+    ;(add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
+    ;(add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
+    
+	;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
+    (tool-bar-mode -1)
+	;; 关闭文件滑动控件
+    (scroll-bar-mode -1)
+	;; 显示行号
+    (global-linum-mode 1)
+	;; 关闭启动帮助画面
+    ;; (setq inhibit-splash-screen 1)
+	;; 关闭缩进 (第二天中被去除), 用双分好;;注释
+    (electric-indent-mode 1)
+	;; 更改显示字体大小 16pt
+    ;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
+    (set-face-attribute 'default nil :height 160)
+	; 开启全局 Company 补全
+    (global-company-mode 1)
+	;; 更改光标的样式（不能生效，解决方案见第二集）
+    ;;(setq cursor-type 'bar)
+	(setq-default cursor-type 'bar)
+	;; 禁止 Emacs 自动生成备份文件
+	(setq make-backup-files nil)
+	
+	;; 最近编辑过的文件
+	(require 'recentf)
+    (recentf-mode 1)
+    (setq recentf-max-menu-item 10)
+	;(global-set-key "C-x C-r" 'recentf-open-files)
+	;(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+	
+    ;; 这个快捷键绑定可以用之后的插件 counsel 代替
+    ;; (global-set-key (kbd "C-x C-r") 'recentf-open-files)
+	;; 当你选中一段文字之后输入一个字符会替换掉你选中部分的文字
+	(delete-selection-mode 1)
+	;; org-mode内语法高亮
+	(require 'org)
+	(setq org-src-fontify-natively t)
+	(show-paren-mode 1)
+	
   )
 
-(setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
-(load custom-file 'no-error 'no-message)
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (monokai-theme-theme command-log-mode ox-gfm kadwait-theme elfeed-goodies elfeed-org elfeed-web elfeed geeknote engine-mode spotify helm-spotify multi twittering-mode wakatime-mode evil-cleverparens evil-commentary evil-snipe diff-hl ansible ansible-doc jinja2-mode counsel-dash helm-dash deft docker docker-tramp dockerfile-mode fasd grizzl flycheck-ledger ledger-mode osx-location rase sunshine theme-changer imenu-list nginx-mode pandoc-mode ox-pandoc pdf-tools tablist prodigy puppet-mode rebox2 ob-http restclient salt-mode mmm-jinja2 yaml-mode spray systemd terraform-mode hcl-mode vagrant vagrant-tramp company-ycmd flycheck-ycmd ycmd request-deferred helm-cscope xcscope ggtags helm-gtags bracketed-paste origami hl-anything evil-magit gitattributes-mode gitconfig-mode git-link git-messenger git-timemachine helm-gitignore gitignore-mode magit-gitflow orgit smeargle gist github-browse-file github-clone github-search magit-gh-pulls magit gh marshal logito pcache magit-popup p4 git-gutter-fringe git-gutter git-gutter-fringe+ fringe-helper git-gutter+ git-commit with-editor floobits company-nixos-options helm-nixos-options nix-mode nixos-options launchctl osx-dictionary osx-trash pbcopy reveal-in-osx-finder nlinum-relative nlinum adoc-mode markup-faces nasm-mode x86-lookup ahk-mode org-ref key-chord helm-bibtex parsebib biblio biblio-core srefactor stickyfunc-enhance cider-eval-sexp-fu clj-refactor edn cider paredit queue peg clojure-mode clojure-snippets common-lisp-snippets slime-company slime omnisharp csharp-mode csv-mode company-dcd d-mode flycheck-dmd-dub alchemist flycheck-mix elixir-mode ob-elixir elm-mode flycheck-elm erlang ess-R-data-view ess-R-object-popup ess-smart-equals ess arduino-mode julia-mode matlab-mode qml-mode scad-mode stan-mode thrift wolfram-mode faust-mode fsharp-mode flycheck-gometalinter graphviz-dot-mode cmm-mode company-cabal company-ghci company-ghc flycheck-haskell ghc haskell-snippets helm-hoogle hindent hlint-refactor intero haskell-mode idris-mode prop-menu ein company-emacs-eclim eclim coffee-mode company-tern js-doc js2-refactor multiple-cursors json-mode json-reformat json-snatcher tern web-beautify livid-mode skewer-mode js2-mode simple-httpd auctex-latexmk company-auctex auctex typo lua-mode company-emoji emoji-cheat-sheet-plus gh-md markdown-toc mmm-mode vmd-mode flycheck-nim nim-mode commenter epc ctable concurrent deferred merlin ocp-indent tuareg caml utop drupal-mode php-extras plantuml-mode psci purescript-mode psc-ide company-anaconda anaconda-mode cython-mode helm-pydoc hy-mode live-py-mode pip-requirements py-isort pyenv-mode pythonic pytest pyvenv yapfify company-quickhelp racket-mode faceup bundler chruby enh-ruby-mode minitest rbenv robe rspec-mode rubocop ruby-test-mode ruby-tools rvm cargo racer flycheck-rust seq rust-mode toml-mode ensime noflet scala-mode sbt-mode geiser glsl-mode company-shell fish-mode insert-shebang ob-sml sml-mode sql-indent swift-mode tide typescript-mode vimrc-mode dactyl-mode powershell chinese-pyim chinese-pyim-basedict chinese-wbim fcitx find-by-pinyin-dired ace-pinyin pinyinlib ace-jump-mode pangu-spacing 2048-game pacmacs dash-functional typit mmt selectric-mode xkcd pony-mode feature-mode projectile-rails rake inf-ruby inflections ibuffer-projectile ox-twbs smex counsel-projectile counsel swiper ivy-hydra wgrep auto-dictionary flyspell-correct-ivy ivy flyspell-correct-helm flyspell-correct-popup flyspell-correct flyspell-popup erc-gitter jabber fsm rcirc-color rcirc-notify slack emojify circe oauth2 websocket dalect-blac-theme aafternoon-theme dadwait-theme dafternoon-theme mwim mu4e-maildirs-extension mu4e-alert ht gmail-message-mode ham-mode markdown-mode html-to-markdown edit-server ox-reveal zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme go-eldoc company-go go-mode youdao-dictionary names chinese-word-at-point xterm-color web-mode tagedit powerline slim-mode shell-pop scss-mode sass-mode ranger rainbow-mode rainbow-identifiers pug-mode spinner org alert log4e gntp multi-term less-css-mode hydra parent-mode projectile helm-css-scss haml-mode pos-tip flycheck pkg-info epl flx smartparens iedit anzu evil goto-chg undo-tree highlight eshell-z eshell-prompt-extras esh-help emmet-mode f s disaster diminish company-web web-completion-data company-c-headers company color-identifiers-mode cmake-mode clang-format bind-map bind-key yasnippet packed dash helm avy helm-core async auto-complete popup package-build php-auto-yasnippets phpcbf phpunit php-mode erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(show-paren-mode t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil)))))

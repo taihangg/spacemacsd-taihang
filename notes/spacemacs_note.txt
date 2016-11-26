@@ -1,3 +1,3 @@
 SPC s j             counsel-imenu
-SPC h SPC
+SPC h SPC           查看已经安装的package
 SPC a d/SPC f j     dired

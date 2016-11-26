@@ -26,8 +26,6 @@
   (call-interactively 'occur)
   )
 
-;;(evilified-state-evilify-map occur-mode-map
-;;  :mode occur-mode)
 
 ;;(require 'color-theme-solarized)
 ;;(color-theme-solarized)

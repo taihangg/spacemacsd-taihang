@@ -32,6 +32,9 @@
 (defconst taihangg-packages
   '(
     youdao-dictionary
+    company
+    (occur-mode :location built-in)
+    ;;(gulpjs :location (recipe :fetcher github :repo "zilongshanren/emacs-gulpjs"))
     )
   "The list of Lisp packages required by the taihangg layer.
 
@@ -60,6 +63,9 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
+;;(defun taihangg/init-gulpjs()
+;;  a(use-package gulpjs
+;;    a:init))
 
 ;;; packages.el ends here
 (defun taihangg/init-youdao-dictionary()
@@ -68,5 +74,13 @@ Each entry is either:
     :init
     (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
     )
+  )
+
+(defun taihangg/post-init-company()
+  (setq company-minimum-prefix-length 1))
+
+(defun taihangg/init-occur-mode()
+  (evilified-state-evilify-map occur-mode-map
+    :mode occur-mode)
   )
 
