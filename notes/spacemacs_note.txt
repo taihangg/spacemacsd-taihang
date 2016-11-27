@@ -1,3 +1,65 @@
 SPC s j             counsel-imenu
 SPC h SPC           查看已经安装的package
 SPC a d/SPC f j     dired
+
+
+
+
+;;;;;;;;; helm
+helm-m-x
+helm-do-ag
+helm-do-ag-project-root
+使用!排除过滤
+支持直接在搜索结果buffer中修改原文件内容 (支持iedit?)
+C-c C-e, helm-ag-eidt, 编辑搜索结果buffer, C-c C-c 编辑完成, C-c C-k   取消
+
+
+
+helm-file中，C-h上一级目录
+
+** File related operations
+1. =SPC p f= (find a file in current project, it looks like the Ctrl-p plugin in Vim)
+2. =SPC f f= to find a file start from the current directory
+3. =SPC f L= find the file across the whole Mac system
+4. =SPC f l= find file literally(I also enhance this func with ffap)
+5. =SPC f h= find file in hex mode(I also enhance this func with ffap);C-c C-c回到普通模式
+6. =SPC f o= open with external program
+7. =SPC f E= sudo edit
+    SPC b w     取消RO模式
+8. =SPC f D= delete current file and buffer
+9. =SPC f j= open the current file's dired mode
+10. =SPC f r= find the recent file with ivy
+11. =SPC f R= rename the current file
+12. =SPC f v= add local variables
+13. =SPC f y= yank current buffer's full path
+14. =SPC f a d= find the current visited directory with fasd.
+15. =SPC f C d/u= convert file encoding between unix and dos
+16. =SPC f e d= find the .spacemacs/.spacemacs.d/init.el file
+17. =SPC f e i= find the .emacs/.emacs.d/init.el init file
+18. =SPC f e l= helm locate library file
+19. =SPC f c= copy file
+20. =SPC f b= show bookmarks
+21. =SPC f s/S= save buffers
+
+
+
+** buffer related operations
+1. =SPC b .= buffer micro state (hydra)
+2. =SPC b b= switch buffers, i rebind it to =ivy-switch-buffer=, because I could see recent use file in buffer
+3. =SPC b d= kill a buffer
+4. =SPC b f= find buffer file in finder
+5. =SPC b B/i= I bind it to ibuffer; 像dired操作文件一样操作buffer
+6. =SPC b h= go to home
+7. =SPC b k=  kill matching buffers
+8. =SPC b N= new empty buffer
+9. =SPC b m= kill others
+10. =SPC b R= safe revert buffer
+11. =SPC b s= switch to scratch buffer
+12. =SPC b w= toggle buffer read-only
+13. =SPC b Y=  copy the whole buffer to clipboard, the content could be used in other programs
+14. =SPC b P= paste to the whole buffer
+15. =SPC  <tab>= switch between the current buffer and the last opened buffer
+
+
+
+
